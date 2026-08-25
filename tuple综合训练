@@ -1,0 +1,53 @@
+#现有两个变量,分别为: a = 10, b = 20, 现需要将这两个变量值交换,然后输出到控制台.
+a = 10
+b = 20
+a, b = b, a
+print(f"a = {a}, b = {b}")
+
+
+#现有三个变量,分别为: a = 100, b = 200, c = 300,现需要将这三个变量值进行交换,将 a, b, c 的值分别赋值给 c, a, b, 并将其输出到控制台.
+a = 100
+b = 200
+c = 300
+a, b, c = c, a, b
+print(f"a = {a}, b = {b}, c = {c}")
+
+
+
+#根据提供的学生成绩单,完成如下需求:
+students = (
+    ("S001","王林", 85, 92, 78),
+    ("S002","李慕婉", 92, 88, 95),
+    ("S003","十三", 78, 85, 82),
+    ("S004","曾牛", 88, 79, 91),
+    ("S005","周轶", 95, 96, 89),
+    ("S006","王卓", 76, 82, 77),
+    ("S007","红蝶", 89, 91, 94),
+    ("S008","徐立国", 75, 69, 82),
+    ("S009","许木", 86, 89, 98),
+    ("S010","遁天", 66, 59, 72)
+
+)
+#1.计算每个学生的总分,各科平均分,然后一并输出出来
+print("每个学生的总分,各科平均分如下:")
+for id, name, chinese, math, english in students:
+    total = chinese + math + english
+    avg = total / 3
+    print(f"学号:{id},  姓名:{name},    总分:{total},   平均分:{avg:.1f}")
+print()
+#2.统计各科成绩的最低分,最高分,平均分,并输出.
+print("各科成绩的最低分,最高分,平均分如下:")
+chinese_score = [s[2] for s in students]
+math_score = [s[3] for s in students]
+english_score = [s[4] for s in students]
+print(f"语文最高分:{max(chinese_score)},    最低分:{min(chinese_score)},    平均分:{sum(chinese_score)/len(students)}")
+print(f"数学最高分:{max(math_score)},   最低分:{min(math_score)},   平均分:{sum(math_score)/len(students)}")
+print(f"英语最高分:{max(english_score)},    最低分:{min(english_score)},    平均分:{sum(english_score)/len(students)}")
+print()
+#3.查找成绩优秀(平均分大于90)的学生,并输出.
+print("成绩优秀的学生如下:")
+for id, name, chinese, math, english in students:
+    total = chinese + math + english
+    avg = total / 3
+    if avg > 90:
+        print(f"学号:{id},  姓名:{name},    平均分:{avg:.1f}")

@@ -1,0 +1,70 @@
+#99乘法表
+for i in range(1,10):
+    for j in range(1,i+1):
+        print(f"{j} * {i} = {i*j}",end = "\t")
+    print()
+
+
+# 打印等腰直角三角形
+a = int(input("请输入三角形的边长:"))
+for i in range(1,a+1):
+    for j in range(1,i+1):
+        print("* ",end = "")
+    print()
+    
+
+# 打印数字金字塔
+a = int(input("请输入数字金字塔的层数:"))
+for i in range(1,a+1):
+    for j in range (1,i+1):
+        print(j,end = " ")
+    print()
+
+
+# 打印国际象棋棋盘
+for i in range(1,9):
+    for j in range(1,9):
+        if (i+j)%2 == 0:
+            print("■",end = " ")
+        else:
+            print("□",end = " ")
+    print()
+
+
+# 用户名密码登录,超过五次不允许操作
+for i in range(5):
+    username = input("请输入用户名:")
+    password = input("请输入密码:")
+    if username == "admin" and password == "666888":
+        print("登录成功")
+        break
+    elif username == "zhangsan" and password == "123456":
+        print("登录成功")
+        break
+    elif username == "taoge" and password == "888666":
+        print("登录成功")
+        break
+    else:
+        print("用户名或密码错误,请重新输入")
+        print(f"您还有{4-i}次机会")
+        continue
+        
+
+# 将1-1000之间(含1000)的所有的5的倍数的数字累加起来
+total = 0
+for i in range(1,1001):
+    if i%5 == 0:
+        total += i
+print(f"1-1000之间(含1000)的所有的5的倍数的数字累加起来的结果是:{total}")
+
+
+# 统计字符串 "akiwksjakdiklowiqaamnvbamvaxnsjdsjkaakjd" 有多少个 a 和 k
+str = "akiwksjakdiklowiqaamnvbamvaxnsjdsjkaakjd"
+count_a = 0
+count_k = 0
+for i in str:
+    if i == "a":
+        count_a += 1
+    elif i == "k":
+        count_k += 1
+print(f"字符串中有{count_a}个a和{count_k}个k")
