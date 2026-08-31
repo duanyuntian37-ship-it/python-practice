@@ -1,0 +1,56 @@
+#1.定义一个函数,根据传入的分数,计算对应的分数等级并返回.
+# 分数 >= 90: A
+# 分数 >= 75: B
+# 分数 >= 60: C
+# 分数 < 60: D
+def grade(score):
+    if score >= 90:
+        return "A"
+    if score >= 75 and score < 90:
+        return "B"
+    if score >=60 and score < 75:
+        return "C"
+    if score < 60:
+        return "D"
+grade_score = int(input("请输入分数:"))
+print(f"你的分数等级为{grade(grade_score)}")
+
+
+#2.定义一个函数,用于判断一个字符串是否为回文串,返回bool值.
+def test(zifu):
+    zifu2 = zifu[::-1]
+    if zifu2 == zifu:
+        return True
+    else:
+        return False
+str1 = input("请输入字符串:")
+result = test(str1)
+print(f"{result}")
+
+
+#3.定义一个函数:完成时间转换功能,将传入的秒转换为小时,分钟,秒.
+def transformation(time: int)  -> tuple[int, int, int]:
+    hour = time // 3600
+    minute = (time - hour * 3600) // 60
+    second = (time - hour * 3600 - minute * 60)
+    return hour, minute, second
+time1 = int(input("请输入要转换的时间:"))
+result = transformation(time1)
+print(f"转换后的时间为{result[0]}时,{result[1]}分,{result[2]}秒")
+
+
+#4.定义一个函数:根据传入的三角形的三个边长,判定三角形的类型(等边,等腰,普通,或者不能构成三角形).
+def triangle(side1: float, side2: float, side3: float):
+    if side1 + side2 <= side3 or side1 + side3 <= side2 or side2 + side3 <= side1:
+        return "不能构成三角形"
+    elif side1 == side2 == side3:
+        return "该三角形为等边三角形"
+    elif side1 == side2 or side1 == side3 or side2 == side3:
+        return "该三角形为等腰三角形"
+    else:
+        return "该三角形为普通三角形"
+s1 = float(input("请输入三角形的第一条边长:"))
+s2 = float(input("请输入三角形的第二条边长:"))
+s3 = float(input("请输入三角形的第三条边长:"))
+result = triangle(s1, s2, s3)
+print(f"{result}")
