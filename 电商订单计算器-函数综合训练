@@ -1,0 +1,16 @@
+# 定义一个函数,用于根据传入的一批商品信息(商品名, 价格, 数量), 优惠(优惠劵, 积分抵扣), 运费信息计算订单的总金额.
+# 具体规则如下:
+# 优惠券需要商品金额满5000才可以使用, 且优惠券金额不能超过商品总价.
+# 积分抵扣需要商品总金额满5000才可以使用, 100积分抵扣1元(且抵扣金额不能超过商品总价, 积分只能整百抵扣).
+def calc(*args: tuple[str, float, int], coupon = 0, point = 0, express = 0) -> float:
+    goods_price = [goods[1] * goods[2] for goods in args]
+    total_goods_price = sum(goods_price)
+    if total_goods_price >= 5000 and coupon <= total_goods_price:
+        total_goods_price -= coupon
+    if total_goods_price >= 5000 and point //100 <=total_goods_price:
+        total_goods_price -= point // 100
+    total_goods_price += express
+    return total_goods_price
+#测试
+result = calc(("手机", 2000, 1), ("耳机", 500, 2), ("电脑", 8000, 1), coupon = 200, point = 2000, express = 20)
+print(result)
