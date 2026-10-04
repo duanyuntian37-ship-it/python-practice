@@ -2,5 +2,122 @@
 #1.添加购物车：用户根据提示录入商品名称、以及该商品的价格、数量，保存该商品信息到购物车。
 #2.修改购物车：要求用户输入要修改的购物车商品名称，然后再提示输入该商品的价格、数量，输入完成后修改该商品信息。
 #3.删除购物车：要求用户输入要删除的购物车名称，根据名称删除购物车中的商品。
-#4.查询购物车：将购物车中的商品信息展示出来，格式为：“商品名称：XXX，商品价格：XXX，商品数量：XXX"。
-#5.退出购物车
+#4.查询指定商品：根据输入的商品名称，查找对应的商品信息，并输出
+#5.查询购物车：将购物车中的商品信息展示出来，格式为：“商品名称：XXX，商品价格：XXX，商品数量：XXX"。
+#6.退出购物车
+
+#商品类
+class Goods:
+    def __init__(self, name, price, number):
+        self.name = name
+        self.price = price
+        self.number = number
+
+    def __str__(self):
+        return f"商品名称: {self.name}, 商品价格: {self.price}, 商品数量: {self.number}"
+
+    def update_goods(self, price = None, number = None):
+        if price is not None:
+            self.price = price
+        if number is not None:
+            self.number = number
+
+#购物车类
+class ShoppingCart:
+    system_version = 1.0
+    system_name = "购物车系统"
+
+    def __init__(self):
+        self.goods_list = []
+
+    #添加购物车
+    def add_goods(self):
+        name = input("请输入商品名称:").strip()
+        for s in self.goods_list:
+            if s.name == name:
+                print("商品已存在,请重新输入!")
+                return
+        price = float(input("请输入商品价格:"))
+        number = int(input("请输入商品数量:"))
+        good = Goods(name, price, number)
+        self.goods_list.append(good)
+        print(f"商品{name}添加成功!")
+
+    #修改购物车
+    def update_goods(self):
+        name = input("请输入要修改的商品名称:").strip()
+        for s in self.goods_list:
+            if s.name == name:
+                print(f"当前商品: {s}")
+                price = float(input("请输入修改后的商品价格:"))
+                number = int(input("请输入修改后的商品数量:"))
+                s.update_goods(price, number)
+                print(f"商品{name}修改成功!")
+                print(f"修改后价格: {s}")
+                return
+        print("商品不存在,请添加或重新输入!")
+
+    #删除购物车
+    def del_goods(self):
+        name = input("请输入要删除的商品名称:").strip()
+        for s in self.goods_list:
+            if s.name == name:
+                self.goods_list.remove(s)
+                print(f"商品{name}删除成功")
+                return
+        print("商品不存在,请重新输入!")
+
+    #查询指定商品
+    def query_goods(self):
+        name = input("请输入要查询的商品名称:").strip()
+        for s in self.goods_list:
+            if s.name == name:
+                print("该商品信息如下:")
+                print(s)
+                return 
+        print("商品不存在,请添加或重新输入!")
+
+    #查询购物车
+    def list_goods(self):
+        print("商品信息如下:")
+        for s in self.goods_list:
+            print(s)
+
+    #运行程序
+    def run(self):
+        print(f"欢迎使用购物车系统!当前版本: V{ShoppingCart.system_version}")
+        try:
+            while True:
+                print()
+                print("""
+    # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+    # 1.添加购物车  2.修改购物车  3.删除购物车  4.查询指定商品  5.查询购物车 6.退出购物车 #
+    # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+    """)
+                print()
+                choice = input("请选择要执行的操作(1-6):")
+                match choice:
+                    case "1":
+                        self.add_goods()
+                    case "2":
+                        self.update_goods()
+                    case "3":
+                        self.del_goods()
+                    case "4":
+                        self.query_goods()
+                    case "5":
+                        self.list_goods()
+                    case "6":
+                        print("系统已退出,bye~")
+                        break
+                    case _:
+                        print("输入错误,请输入1-6之间的菜单功能!")
+        except ValueError as e:
+            print(f"输入的数据有问题,请检查后重新输入! 错误代码:{e}")
+        except Exception as e:
+            print(f"系统出错了,请重试或联系管理员,错误代码:{e}")
+
+
+if __name__ == '__main__':
+    shopping_cart = ShoppingCart()
+    shopping_cart.run()
